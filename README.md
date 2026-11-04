@@ -1,6 +1,6 @@
 # Reflex – A Discipline Assistant for Prop Firm Traders
 
-Reflex is a desktop app idea for funded traders: a local-first journal with daily check-ins, gamification, and a mascot that reacts to how you trade. It is built with Electron and React.
+Reflex is a desktop app for funded traders: a local-first journal with daily check-ins, gamification, and a mascot that reacts to how you trade. It is built with Electron and React.
 
 **Status: early prototype.** The UI shell, daily check-in, trade journal form, and an animated mascot run today. Entries live in in-memory state only and are lost on reload. Persistence, AI feedback, XP/badges, rule monitoring, and the resume export are planned and not built yet.
 
