@@ -128,7 +128,7 @@ Planning documents for each phase are in [`docs/`](docs/_index.md). They describ
 
 ## License
 
-MIT License
+MIT — see [LICENSE](LICENSE).
 
 ---
 
