@@ -2,17 +2,20 @@
 
 ## Prerequisites
 - Node.js (v18+)
-- npm or yarn
+- npm
 
-## Install & Run (once scaffolded)
-1. Clone the repo
-2. Run `npm install`
-3. Run `npm run dev` (Electron + React will start)
+## Install & Run
+1. Clone the repo: `git clone https://github.com/garrettm19/reflex-trading-journal.git`
+2. `cd reflex-trading-journal`
+3. `npm install`
+4. `npm run dev` – Vite dev server for the renderer at http://localhost:5173 (open in a browser)
+5. `npm start` – Vite dev server plus the Electron window
+6. `npm run build` – build the renderer to `dist/renderer`
 
 ## Project Structure
-- `src/` – Main application logic
-- `renderer/` – UI (React + Zustand)
-- `overlay/` – Floating mascot system
-- `db/` – SQLite schema and access
-- `docs/` – All SDLC and planning documentation
-- `demo/` – Screenshots and demo assets
+- `src/main/` – Electron main process
+- `src/renderer/` – UI (React + Zustand)
+- `src/overlay/` – floating mascot overlay (stub, planned)
+- `src/db/` – SQLite access (stub, planned)
+- `docs/` – SDLC and planning documentation
+- `demo/` – screenshots

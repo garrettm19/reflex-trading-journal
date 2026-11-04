@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/garrettm19/reflex.git"
+    "url": "https://github.com/garrettm19/reflex-trading-journal.git"
   },
   "bugs": {
-    "url": "https://github.com/garrettm19/reflex/issues"
+    "url": "https://github.com/garrettm19/reflex-trading-journal/issues"
   },
-  "homepage": "https://github.com/garrettm19/reflex#readme",
+  "homepage": "https://github.com/garrettm19/reflex-trading-journal#readme",
   "keywords": [
     "electron",
     "vite",

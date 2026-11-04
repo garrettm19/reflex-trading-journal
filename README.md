@@ -1,119 +1,101 @@
 # Reflex – A Discipline Assistant for Prop Firm Traders
 
-Reflex is a local-first desktop application that helps funded traders improve discipline through journaling, gamification, and real-time behavioral feedback. Built using Electron and React, the app provides structured journaling, AI insights, streak tracking, and a floating mascot that responds to the trader’s actions.
+Reflex is a desktop app for funded traders: a local-first journal with daily check-ins, gamification, and a mascot that reacts to how you trade. It is built with Electron and React.
+
+**Status: early prototype.** The UI shell, daily check-in, trade journal form, and an animated mascot run today. Entries live in in-memory state only and are lost on reload. Persistence, AI feedback, XP/badges, rule monitoring, and the resume export are planned and not built yet.
 
 ---
 
 ## Project Purpose
 
-Traders in prop firm environments (Apex, Topstep, MyFundedFutures, etc.) often fail not because of poor strategy, but because of broken discipline. Reflex addresses this by:
+Traders in prop firm environments (Apex, Topstep, MyFundedFutures, etc.) often fail not because of poor strategy, but because of broken discipline. Reflex is meant to help by:
 
 - Encouraging good habits and no-trade days
 - Logging every trade with purpose, structure, and review
-- Providing real-time feedback through a mascot assistant
-- Helping traders stick to their rules and build confidence
+- Giving feedback through a mascot assistant
+- Helping traders stick to their rules
 
 ---
 
-## Key Features
+## Current prototype
 
-- Trade journaling with R:R, grades, notes, and screenshots
-- GPT-powered feedback on trade quality and behavioral patterns
-- Daily check-ins with streak rewards, XP, and badges
+What the code does today:
+
+- **App layout** – sidebar, header, and main content area (React + Tailwind). Sidebar links, the streak card, the user card, and the header date are static placeholders.
+- **Daily check-in** – "Did you trade today?" with Yes/No. Records the answer in a Zustand store and switches to a "checked in" state for the session.
+- **Trade journal form** – planned R:R, outcome (win/loss/breakeven), and notes, with basic validation. Submitting adds the entry to a Zustand store and shows a summary.
+- **Mascot** – a Lottie animation pinned to the corner of the window. Several animations are bundled and wired to a mascot store, but nothing changes its state yet, so only the idle animation plays.
+- **Electron shell** – a minimal main process that opens a window and loads the Vite dev server.
+
+There is no database yet: `src/db/database.tsx` and `src/overlay/Mascot.tsx` are empty stubs, and check-ins and journal entries are only logged to the console and kept in memory.
+
+## Planned
+
+- SQLite persistence for journal entries, check-ins, and progress
+- GPT-based feedback on trade quality and behavior patterns
+- Streaks, XP, and badges driven by real data
 - Rule system with live monitoring (max trades, trading hours, etc.)
-- Transparent animated mascot overlay with voice and animation
-- Exportable “Discipline Resume” PDF based on behavior, not PnL
+- Transparent mascot overlay window that reacts to rule breaks
+- Screenshot attachments on journal entries
+- Exportable "Discipline Resume" PDF based on behavior, not PnL
 
 ---
 
 ## Tech Stack
 
-- Electron – Cross-platform desktop shell
-- React + Tailwind CSS – UI framework
-- Zustand – Global state management
-- SQLite – Local database for journals and progress
-- OpenAI GPT-4 – AI feedback and trade analysis
-- Lottie – Animated mascot overlay
-- Web Audio API – Sound effects and voice
+- Electron – desktop shell
+- React + Vite – UI and dev server
+- Tailwind CSS v4 – styling
+- Zustand – state management
+- lottie-react – mascot animations
+- SQLite – planned, not implemented
+- OpenAI API – planned, not implemented
 
 ---
 
-## Project Roadmap
+## Running Locally
 
-Track progress: [Reflex GitHub Project Board](https://github.com/garrettm19/reflex/projects)
+Requires Node.js 18 or newer.
 
----
+```bash
+git clone https://github.com/garrettm19/reflex-trading-journal.git
+cd reflex-trading-journal
+npm install
+```
 
-## File Structure Overview
-
-- `src/` – Source code (Electron, React, Overlay, Zustand, DB)
-- `docs/` – Full SDLC documentation (Phases 01–11)
-- `demo/` – Screenshots and demo video assets
-- `.github/` – Templates and contribution files
-- `README.md` – Public project overview
-
----
-
-## Installation (Coming Soon)
-
-This project is in active development. The MVP scaffold will follow this setup:
-
-1. Clone this repository  
-   `git clone https://github.com/garrettm19/reflex.git`
-
-2. Navigate into the project directory  
-   `cd reflex`
-
-3. Install dependencies  
-   `npm install`
-
-4. Start the development server  
-   `npm run dev`
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Starts the Vite dev server for the renderer at http://localhost:5173. Open it in a browser. |
+| `npm start` | Starts the Vite dev server and, once it is up, opens the Electron window pointed at it. |
+| `npm run build` | Builds the renderer to `dist/renderer`. There is no packaged Electron build yet. |
 
 ---
 
-## Getting Started (Planned)
+## Screenshots (prototype)
 
-Upon first launch:
-1. User is prompted to define rules and settings.
-2. Each day begins with a check-in: “Did you trade today?”
-3. User logs a trade or a no-trade day.
-4. Mascot responds to behavior and feedback is generated via GPT.
-5. XP and streaks update automatically.
+Captured from the renderer running in a browser via `npm run dev`.
 
----
-
-## Demo
-
-**Demo video coming soon.** It will include:
-
-- Logging a trade with screenshot and notes
-- Receiving GPT feedback
-- Mascot reacting to a rule break
-- Viewing a 7-day streak and exporting the resume
+| Main view | Journal form | Entry saved |
+|-----------|--------------|-------------|
+| ![Main view with check-in and journal form](demo/main-view.png) | ![Check-in done and journal form filled in](demo/journal-form.png) | ![Journal entry summary after submit](demo/journal-entry-saved.png) |
 
 ---
 
-## Screenshots (To Be Added)
+## File Structure
 
-Store the following images in the `/demo` folder:
-
-- `dashboard_screenshot.png`
-- `journal_entry_screenshot.png`
-- `mascot_warning.png`
-- `export_resume.png`
-
-Update the table below once available.
-
-| Dashboard | Journal Entry | Mascot Warning | Resume Export |
-|-----------|----------------|----------------|----------------|
-| *(screenshot)* | *(screenshot)* | *(screenshot)* | *(screenshot)* |
+- `src/main/` – Electron main process
+- `src/renderer/` – React UI, components, and Zustand stores
+- `src/overlay/` – mascot overlay window (stub)
+- `src/db/` – database layer (stub)
+- `scripts/` – Electron start script
+- `docs/` – SDLC and planning documents
+- `demo/` – screenshots
 
 ---
 
-## Full Documentation
+## Documentation
 
-This project follows a full software development lifecycle (SDLC). Each phase is documented in `/docs/`.
+Planning documents for each phase are in [`docs/`](docs/_index.md). They describe the intended design, which is further along than the code.
 
 - [01 – Problem Discovery](docs/01_discovery_and_problem.md)
 - [02 – Feature Requirements](docs/02_feature_requirements.md)
@@ -131,25 +113,26 @@ This project follows a full software development lifecycle (SDLC). Each phase is
 
 ## Next Steps
 
-- [x] Scaffold Electron + React with overlay window
-- [x] Add mascot idle and feedback animations
+- [x] Scaffold Electron + React
+- [x] Check-in and journal form UI with local state
+- [x] Mascot idle animation
 - [ ] Implement SQLite journaling backend
+- [ ] Trigger mascot reactions from app events
+- [ ] Separate transparent overlay window for the mascot
 - [ ] Add XP and badge logic
 - [ ] Connect GPT feedback to journal entries
-- [ ] Build resume export functionality
-- [ ] Add demo screenshots to `/demo` folder
-- [ ] Record and upload demo walkthrough video
+- [ ] Build resume export
+- [ ] Record a demo walkthrough
 
 ---
 
 ## License
 
-MIT License
+MIT — see [LICENSE](LICENSE).
 
 ---
 
 ## Author
 
-Built by Mason Garrett  
-Contact: mgarrett620@gmail.com  
+Built by Mason Garrett
 GitHub: [garrettm19](https://github.com/garrettm19)
